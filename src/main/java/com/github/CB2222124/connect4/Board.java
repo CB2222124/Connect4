@@ -4,6 +4,7 @@ package com.github.CB2222124.connect4;
 public class Board {
 
     private final char[][] board;
+    private int moves;
 
     /**
      * Instantiates a Connect 4 board.
@@ -14,6 +15,7 @@ public class Board {
      * @param columns The number of columns.
      */
     public Board(int rows, int columns) {
+        if (rows < 1 || columns < 1) throw new IllegalArgumentException("There must be at least one row and column");
         board = new char[rows][columns];
         instantiateBoard();
     }
@@ -32,19 +34,23 @@ public class Board {
     }
 
     /**
-     * Checks if this board is full. Full is defined as no '-' character present within the array.
+     * Checks if this board is full of non-empty tokens.
      *
      * @return True if this board is full, false otherwise.
      */
     public boolean isFull() {
-        for (int row = 0; row < board.length; row++) {
-            for (int column = 0; column < board[0].length; column++) {
-                if (board[row][column] == '-') {
-                    return false;
-                }
-            }
-        }
-        return true;
+        return moves == board.length * board[0].length;
+    }
+
+    /**
+     * Checks if a column is both valid and not full.
+     *
+     * @param column The column to validate.
+     * @return True if the specified column is valid, false otherwise.
+     */
+    public boolean validMove(int column) {
+        if (column < 0 || column > board[0].length) return false;
+        return board[0][column] == '-';
     }
 
     /**
@@ -52,18 +58,17 @@ public class Board {
      *
      * @param column The column to insert into.
      * @param token  The token to insert.
-     * @return True on success, false if the specified move column is full or out of bounds.
      */
-    public boolean makeMove(int column, char token) {
-        if (column < 0 || column > board[0].length) return false;
+    public void makeMove(int column, char token) {
+        if (!validMove(column)) throw new IllegalArgumentException("Column results in an illegal move");
+        moves++;
         //Occupy the first available row from the end of the specified column.
         for (int row = board.length - 1; row >= 0; row--) {
             if (board[row][column] == '-') {
                 board[row][column] = token;
-                return true;
+                break;
             }
         }
-        return false;
     }
 
     /**
@@ -120,6 +125,15 @@ public class Board {
             }
         }
         return false;
+    }
+
+    /**
+     * Number of valid moves made on this board (Number of tokens inserted into the board).
+     *
+     * @return Number of moves made.
+     */
+    public int getMoves() {
+        return moves;
     }
 
     /**
