@@ -16,14 +16,10 @@ public class Main {
         System.out.println(board);
     }
 
-    public static boolean handleTurn(Board board, Player player, Player opponent) {
+    private static boolean handleTurn(Board board, Player player, Player opponent) {
         System.out.println(board);
-        int move = player.getMove(board, opponent);
-        if (board.validMove(move)) {
-            board.makeMove(move, player.getToken());
-        } else {
-            System.out.println("Invalid move, turn forfeited");
-        }
+        int move = getMove(board, player, opponent);
+        board.makeMove(move, player.getToken());
         if (board.isWinningPosition(player.getToken())) {
             System.out.println("Winner: " + player.getName());
             return true;
@@ -32,6 +28,15 @@ public class Main {
             return true;
         } else {
             return false;
+        }
+    }
+
+    private static int getMove(Board board, Player player, Player opponent) {
+        int move = player.getMove(board, opponent);
+        if (board.validMove(move)) {
+            return move;
+        } else {
+            return getMove(board, player, opponent);
         }
     }
 }
