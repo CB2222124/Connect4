@@ -73,6 +73,17 @@ public class Board {
     }
 
     /**
+     * Replaces all tokens within the specified column with the empty token.
+     *
+     * @param column The column to blitz.
+     */
+    public void makeBlitz(int column) {
+        for (int row = 0; row < board.length; row++) {
+            board[row][column] = '-';
+        }
+    }
+
+    /**
      * Evaluates this board for a winning position for a given token.
      * A winning position is defined as a continuous horizontal, vertical, or diagonal
      * line of four with the given token.
