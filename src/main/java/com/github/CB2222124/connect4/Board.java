@@ -4,7 +4,6 @@ package com.github.CB2222124.connect4;
 public class Board {
 
     private final char[][] board;
-    private int moves;
 
     /**
      * Instantiates a Connect 4 board.
@@ -39,7 +38,10 @@ public class Board {
      * @return True if this board is full, false otherwise.
      */
     public boolean isFull() {
-        return moves == board.length * board[0].length;
+        for (int column = 0; column < board[0].length; column++) {
+            if (board[0][column] != '-') return false;
+        }
+        return true;
     }
 
     /**
@@ -61,7 +63,6 @@ public class Board {
      */
     public void makeMove(int column, char token) {
         if (!validMove(column)) throw new IllegalArgumentException("Column results in an illegal move");
-        moves++;
         //Occupy the first available row from the end of the specified column.
         for (int row = board.length - 1; row >= 0; row--) {
             if (board[row][column] == '-') {
@@ -82,58 +83,49 @@ public class Board {
     public boolean isWinningPosition(char token) {
         //Horizontal evaluation.
         for (int row = 0; row < board.length; row++) {
-            for (int col = 0; col < board[0].length - 3; col++) {
-                if (board[row][col] == token &&
-                    board[row][col + 1] == token &&
-                    board[row][col + 2] == token &&
-                    board[row][col + 3] == token) {
+            for (int column = 0; column < board[0].length - 3; column++) {
+                if (board[row][column] == token &&
+                    board[row][column + 1] == token &&
+                    board[row][column + 2] == token &&
+                    board[row][column + 3] == token) {
                     return true;
                 }
             }
         }
         //Vertical evaluation.
         for (int row = 0; row < board.length - 3; row++) {
-            for (int col = 0; col < board[0].length; col++) {
-                if (board[row][col] == token &&
-                    board[row + 1][col] == token &&
-                    board[row + 2][col] == token &&
-                    board[row + 3][col] == token) {
+            for (int column = 0; column < board[0].length; column++) {
+                if (board[row][column] == token &&
+                    board[row + 1][column] == token &&
+                    board[row + 2][column] == token &&
+                    board[row + 3][column] == token) {
                     return true;
                 }
             }
         }
         //Negative diagonal evaluation.
         for (int row = 3; row < board.length; row++) {
-            for (int col = 0; col < board[0].length - 3; col++) {
-                if (board[row][col] == token &&
-                    board[row - 1][col + 1] == token &&
-                    board[row - 2][col + 2] == token &&
-                    board[row - 3][col + 3] == token) {
+            for (int column = 0; column < board[0].length - 3; column++) {
+                if (board[row][column] == token &&
+                    board[row - 1][column + 1] == token &&
+                    board[row - 2][column + 2] == token &&
+                    board[row - 3][column + 3] == token) {
                     return true;
                 }
             }
         }
         //Positive diagonal evaluation.
         for (int row = 0; row < board.length - 3; row++) {
-            for (int col = 0; col < board[0].length - 3; col++) {
-                if (board[row][col] == token &&
-                    board[row + 1][col + 1] == token &&
-                    board[row + 2][col + 2] == token &&
-                    board[row + 3][col + 3] == token) {
+            for (int column = 0; column < board[0].length - 3; column++) {
+                if (board[row][column] == token &&
+                    board[row + 1][column + 1] == token &&
+                    board[row + 2][column + 2] == token &&
+                    board[row + 3][column + 3] == token) {
                     return true;
                 }
             }
         }
         return false;
-    }
-
-    /**
-     * Number of valid moves made on this board (Number of tokens inserted into the board).
-     *
-     * @return Number of moves made.
-     */
-    public int getMoves() {
-        return moves;
     }
 
     /**
