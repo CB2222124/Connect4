@@ -34,7 +34,7 @@ public class Connect4 {
      * Handles a turn for each player until a game completion event is reached (Winner or full board).
      */
     private void play() {
-        while (!board.isFull()) { //TODO: In our modified version of connect4, we should check if the current player can free spaces in the board with a move.
+        while (!board.isFull()) { //TODO: In our modified version of connect4, we should ideally check if the current player can free spaces in the board with a move (e.g. Blitz).
             if (handleTurn(player1)) {
                 view.showWinner(player1);
                 return;
