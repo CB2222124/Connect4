@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BoardIsFullTest {
 
-    BoardTestUtil boardTestUtil = new BoardTestUtil();
+    BoardTestUtils boardTestUtils = new BoardTestUtils();
 
     @Test
     public void emptyReturnsFalse() {
@@ -20,29 +20,29 @@ public class BoardIsFullTest {
     @Test
     public void fullReturnsTrue() {
         Board board = new Board(3, 3);
-        boardTestUtil.fillBoardWithToken(board, new BasicToken(TokenOwner.NOUGHTS));
+        boardTestUtils.fillBoardWithToken(board, new BasicToken(TokenOwner.NOUGHTS));
         assertTrue(board.isFull());
     }
 
     @Test
     public void firstColumnEmptyReturnsFalse() {
         Board board = new Board(3, 3);
-        boardTestUtil.fillBoardWithToken(board, new BasicToken(TokenOwner.NOUGHTS));
-        boardTestUtil.fillColumnWithToken(board, 0, new BasicToken(TokenOwner.NONE));
+        boardTestUtils.fillBoardWithToken(board, new BasicToken(TokenOwner.NOUGHTS));
+        boardTestUtils.fillColumnWithToken(board, 0, new BasicToken(TokenOwner.NONE));
         assertFalse(board.isFull());
     }
 
     @Test
     public void lastColumnEmptyReturnsFalse() {
         Board board = new Board(3, 3);
-        boardTestUtil.fillBoardWithToken(board, new BasicToken(TokenOwner.NOUGHTS));
-        boardTestUtil.fillColumnWithToken(board, 2, new BasicToken(TokenOwner.NONE));
+        boardTestUtils.fillBoardWithToken(board, new BasicToken(TokenOwner.NOUGHTS));
+        boardTestUtils.fillColumnWithToken(board, 2, new BasicToken(TokenOwner.NONE));
         assertFalse(board.isFull());
     }
 
     @Test
     public void firstColumnOneSpaceReturnsFalse() {
-        Board board = boardTestUtil.char2DArrayToBoard(new char[][]{
+        Board board = boardTestUtils.char2DArrayToBoard(new char[][]{
                 {'-', 'X', 'X'},
                 {'X', 'X', 'X'},
                 {'X', 'X', 'X'}

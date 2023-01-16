@@ -8,11 +8,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BoardIsWinningTest {
 
-    BoardTestUtil boardTestUtil = new BoardTestUtil();
+    BoardTestUtils boardTestUtils = new BoardTestUtils();
 
     @Test
     public void horizontalWinningPositionReturnsTrue() {
-        Board board = boardTestUtil.char2DArrayToBoard(new char[][]{
+        Board board = boardTestUtils.char2DArrayToBoard(new char[][]{
                 {'-', '-', '-', '-', '-', '-'},
                 {'-', '-', '-', '-', '-', '-'},
                 {'-', '-', '-', '-', '-', '-'},
@@ -26,7 +26,7 @@ public class BoardIsWinningTest {
 
     @Test
     public void verticalWinningPositionReturnsTrue() {
-        Board board = boardTestUtil.char2DArrayToBoard(new char[][]{
+        Board board = boardTestUtils.char2DArrayToBoard(new char[][]{
                 {'-', '-', '-', '-', '-', '-'},
                 {'-', '-', '-', '-', '-', '-'},
                 {'-', '-', '-', '-', '-', '-'},
@@ -40,7 +40,7 @@ public class BoardIsWinningTest {
 
     @Test
     public void positiveDiagonalWinningPositionReturnsTrue() {
-        Board board = boardTestUtil.char2DArrayToBoard(new char[][]{
+        Board board = boardTestUtils.char2DArrayToBoard(new char[][]{
                 {'-', '-', '-', '-', '-', '-'},
                 {'-', '-', '-', '-', '-', '-'},
                 {'-', '-', '-', '-', '-', '-'},
@@ -54,7 +54,7 @@ public class BoardIsWinningTest {
 
     @Test
     public void negativeDiagonalWinningPositionReturnsTrue() {
-        Board board = boardTestUtil.char2DArrayToBoard(new char[][]{
+        Board board = boardTestUtils.char2DArrayToBoard(new char[][]{
                 {'-', '-', '-', '-', '-', '-'},
                 {'-', '-', '-', '-', '-', '-'},
                 {'-', '-', '-', '-', '-', '-'},
@@ -68,7 +68,7 @@ public class BoardIsWinningTest {
 
     @Test
     public void noWinningPositionReturnsFalse() {
-        Board board = boardTestUtil.char2DArrayToBoard(new char[][]{
+        Board board = boardTestUtils.char2DArrayToBoard(new char[][]{
                 {'-', '-', '-', '-', '-', '-'},
                 {'-', '-', '-', '-', '-', '-'},
                 {'-', '-', '-', '-', '-', '-'},
@@ -82,7 +82,7 @@ public class BoardIsWinningTest {
 
     @Test
     public void interruptedWinningPositionReturnsFalse() {
-        Board board = boardTestUtil.char2DArrayToBoard(new char[][]{
+        Board board = boardTestUtils.char2DArrayToBoard(new char[][]{
                 {'-', '-', '-', '-', '-', '-'},
                 {'-', '-', '-', '-', '-', '-'},
                 {'-', '-', '-', '-', '-', '-'},

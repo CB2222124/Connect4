@@ -54,7 +54,7 @@ public class ConsolePlayer extends Player {
         try {
             return Integer.parseInt(string);
         } catch (NumberFormatException ex) {
-            throw new MoveException("No move provided");
+            throw new MoveException("Invalid input");
         }
     }
 }

@@ -22,7 +22,7 @@ public class BasicMove implements Move {
 
     @Override
     public void validateMove(Board board) throws MoveException {
-        if (column < 0 || column > board.getBoard()[0].length) throw new MoveException("Column index out of bounds");
+        if (column < 0 || column >= board.getBoard()[0].length) throw new MoveException("Column index out of bounds");
         if (board.getBoard()[0][column].owner() != TokenOwner.NONE) throw new MoveException("Column full");
     }
 

@@ -5,7 +5,7 @@ import com.github.CB2222124.connect4.token.BombToken;
 import com.github.CB2222124.connect4.token.Token;
 import com.github.CB2222124.connect4.token.TokenOwner;
 
-public class BoardTestUtil {
+public class BoardTestUtils {
 
     public void fillBoardWithToken(Board board, Token token) {
         for (int row = 0; row < board.getBoard().length; row++) {
@@ -37,5 +37,18 @@ public class BoardTestUtil {
             }
         }
         return board;
+    }
+
+    public boolean assertBoardsEqual(Board expected, Board actual) {
+        if (expected.getBoard().length != actual.getBoard().length) return false;
+        if (expected.getBoard()[0].length != actual.getBoard()[0].length) return false;
+        for (int row = 0; row < expected.getBoard().length; row++) {
+            for (int column = 0; column < expected.getBoard()[0].length; column++) {
+                if (expected.getBoard()[row][column].owner() != actual.getBoard()[row][column].owner()) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
