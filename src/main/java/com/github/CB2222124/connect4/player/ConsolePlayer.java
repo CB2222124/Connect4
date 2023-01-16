@@ -17,18 +17,24 @@ public class ConsolePlayer extends Player {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter a move: ");
         String input = scanner.nextLine();
+
         if (input.equalsIgnoreCase("B")) {
-            //TODO: Implement;
-            return new BlitzMove();
+            System.out.print("Enter a column to blitz: ");
+            input = scanner.nextLine();
+            return new BlitzMove(parseStringAsColumnIndex(input));
         } else if (input.equalsIgnoreCase("T")) {
+            //TODO: Implement;
             return new BombMove();
         } else {
-            try {
-                int column = Integer.parseInt(input);
-                return new BasicMove(column, getToken());
-            } catch (NumberFormatException ex) {
-                throw new MoveException("No move provided");
-            }
+            return new BasicMove(parseStringAsColumnIndex(input), getToken());
+        }
+    }
+
+    private int parseStringAsColumnIndex(String string) throws MoveException {
+        try {
+            return Integer.parseInt(string);
+        } catch (NumberFormatException ex) {
+            throw new MoveException("No move provided");
         }
     }
 }
