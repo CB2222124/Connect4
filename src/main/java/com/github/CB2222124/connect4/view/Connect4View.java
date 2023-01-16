@@ -10,5 +10,5 @@ public interface Connect4View {
 
     void showDraw();
 
-    void showInvalidMove();
+    void showInvalidMove(String reason);
 }

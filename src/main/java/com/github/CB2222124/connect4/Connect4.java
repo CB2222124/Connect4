@@ -70,7 +70,7 @@ public class Connect4 {
             Move move = player.getMove(board);
             move.makeMove(board);
         } catch (MoveException ex) {
-            view.showInvalidMove();
+            view.showInvalidMove(ex.getMessage());
             handleMove(player);
         }
     }

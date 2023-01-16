@@ -8,6 +8,11 @@ import java.util.Scanner;
 
 public class ConsolePlayer extends Player {
 
+    //TODO: In a scaled application there should be a layer of abstraction that leaves the player with some data structure of available moves.
+    //Limits the use of these two moves to one for a console player.
+    private boolean usedBlitz;
+    private boolean usedBomb;
+
     /**
      * Human player that inputs moves through the Standard input stream.
      *
@@ -25,16 +30,20 @@ public class ConsolePlayer extends Player {
         String input = scanner.nextLine();
 
         if (input.equalsIgnoreCase("B")) {
+            if (usedBlitz) throw new MoveException("Blitz has already been used");
             System.out.print("Enter a column to blitz: ");
             input = scanner.nextLine();
             Move move = new BlitzMove(parseStringAsColumnIndex(input));
             move.validateMove(board);
+            usedBlitz = true;
             return move;
         } else if (input.equalsIgnoreCase("T")) {
+            if (usedBomb) throw new MoveException("Blitz has already been used");
             System.out.print("Enter a column to drop time bomb: ");
             input = scanner.nextLine();
             Move move = new BombMove(parseStringAsColumnIndex(input));
             move.validateMove(board);
+            usedBomb = true;
             return move;
         } else {
             return new BasicMove(parseStringAsColumnIndex(input), getToken());

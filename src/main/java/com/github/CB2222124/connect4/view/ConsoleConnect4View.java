@@ -24,7 +24,7 @@ public class ConsoleConnect4View implements Connect4View {
     }
 
     @Override
-    public void showInvalidMove() {
-        System.out.println("Invalid move, try again");
+    public void showInvalidMove(String reason) {
+        System.out.println("Invalid move, try again (" + reason + ")");
     }
 }
