@@ -45,24 +45,13 @@ public class Board {
     }
 
     /**
-     * Checks if a column is both valid and not full.
-     *
-     * @param column The column to validate.
-     * @return True if the specified column is valid, false otherwise.
-     */
-    public boolean validMove(int column) {
-        if (column < 0 || column > board[0].length) return false;
-        return board[0][column] == '-';
-    }
-
-    /**
      * Inserts a token into the specified column.
      *
      * @param column The column to insert into.
      * @param token  The token to insert.
      */
-    public void makeMove(int column, char token) {
-        if (!validMove(column)) throw new IllegalArgumentException("Column results in an illegal move");
+    public void makeMove(int column, char token) throws IllegalMoveException {
+        validateMove(column);
         //Occupy the first available row from the end of the specified column.
         for (int row = board.length - 1; row >= 0; row--) {
             if (board[row][column] == '-') {
@@ -77,10 +66,21 @@ public class Board {
      *
      * @param column The column to blitz.
      */
-    public void makeBlitz(int column) {
+    public void makeBlitz(int column) throws IllegalMoveException {
+        validateMove(column);
         for (int row = 0; row < board.length; row++) {
             board[row][column] = '-';
         }
+    }
+
+    /**
+     * Validates a standard column insert move.
+     * @param column The column to validate
+     * @throws IllegalMoveException Where column index is out of bounds or full.
+     */
+    public void validateMove(int column) throws IllegalMoveException {
+        if (column < 0 || column > board[0].length) throw new IllegalMoveException("Column index out of bounds");
+        if (board[0][column] != '-') throw new IllegalMoveException("Column full");
     }
 
     /**

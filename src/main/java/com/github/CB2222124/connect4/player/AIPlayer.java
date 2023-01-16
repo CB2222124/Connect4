@@ -16,7 +16,7 @@ public class AIPlayer extends Player {
     }
 
     @Override
-    public int getMove(Board board, Player opponent) {
+    public int getMove(Board board) {
         ArrayList<Integer> validColumns = new ArrayList<>();
         for (int column = 0; column < board.getBoard()[0].length; column++)
             if (board.getBoard()[0][column] == '-') validColumns.add(column);

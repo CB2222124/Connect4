@@ -20,5 +20,5 @@ public abstract class Player {
         return name;
     }
 
-    public abstract int getMove(Board board, Player opponent);
+    public abstract int getMove(Board board);
 }

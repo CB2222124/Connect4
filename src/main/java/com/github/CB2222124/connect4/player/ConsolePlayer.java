@@ -11,7 +11,7 @@ public class ConsolePlayer extends Player {
     }
 
     @Override
-    public int getMove(Board board, Player opponent) {
+    public int getMove(Board board) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter a column: ");
         return scanner.nextInt();
