@@ -1,13 +1,13 @@
 package com.github.CB2222124.connect4.player;
 
 import com.github.CB2222124.connect4.Board;
-import com.github.CB2222124.connect4.Token;
+import com.github.CB2222124.connect4.token.TokenOwner;
 
 import java.util.Scanner;
 
 public class ConsolePlayer extends Player {
 
-    public ConsolePlayer(Token token, String name) {
+    public ConsolePlayer(TokenOwner token, String name) {
         super(token, name);
     }
 

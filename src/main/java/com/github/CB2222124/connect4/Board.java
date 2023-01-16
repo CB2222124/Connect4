@@ -1,5 +1,9 @@
 package com.github.CB2222124.connect4;
 
+import com.github.CB2222124.connect4.token.BasicToken;
+import com.github.CB2222124.connect4.token.Token;
+import com.github.CB2222124.connect4.token.TokenOwner;
+
 @SuppressWarnings("ForLoopReplaceableByForEach")
 public class Board {
 
@@ -25,7 +29,7 @@ public class Board {
     private void instantiateBoard() {
         for (int row = 0; row < board.length; row++) {
             for (int column = 0; column < board[0].length; column++) {
-                board[row][column] = Token.EMPTY;
+                board[row][column] = new BasicToken(TokenOwner.NONE);
             }
         }
     }
@@ -37,7 +41,7 @@ public class Board {
      */
     public boolean isFull() {
         for (int column = 0; column < board[0].length; column++) {
-            if (board[0][column] == Token.EMPTY) return false;
+            if (board[0][column].owner() == TokenOwner.NONE) return false;
         }
         return true;
     }
@@ -48,12 +52,12 @@ public class Board {
      * @param column The column to insert into.
      * @param token  The token to insert.
      */
-    public void makeMove(int column, Token token) throws IllegalMoveException {
+    public void makeMove(int column, TokenOwner token) throws IllegalMoveException {
         validateMove(column);
         //Occupy the first available row from the end of the specified column.
         for (int row = board.length - 1; row >= 0; row--) {
-            if (board[row][column] == Token.EMPTY) {
-                board[row][column] = token;
+            if (board[row][column].owner() == TokenOwner.NONE) {
+                board[row][column] = new BasicToken(token);
                 break;
             }
         }
@@ -67,7 +71,7 @@ public class Board {
     public void makeBlitz(int column) throws IllegalMoveException {
         validateMove(column);
         for (int row = 0; row < board.length; row++) {
-            board[row][column] = Token.EMPTY;
+            board[row][column] = new BasicToken(TokenOwner.NONE);
         }
     }
 
@@ -79,7 +83,7 @@ public class Board {
      */
     public void validateMove(int column) throws IllegalMoveException {
         if (column < 0 || column > board[0].length) throw new IllegalMoveException("Column index out of bounds");
-        if (board[0][column] != Token.EMPTY) throw new IllegalMoveException("Column full");
+        if (board[0][column].owner() != TokenOwner.NONE) throw new IllegalMoveException("Column full");
     }
 
     /**
@@ -90,14 +94,14 @@ public class Board {
      * @param token The token to evaluate for.
      * @return True if there is a winning position for the given token, false otherwise.
      */
-    public boolean isWinningPosition(Token token) {
+    public boolean isWinningPosition(TokenOwner token) {
         //Horizontal evaluation.
         for (int row = 0; row < board.length; row++) {
             for (int column = 0; column < board[0].length - 3; column++) {
-                if (board[row][column] == token &&
-                    board[row][column + 1] == token &&
-                    board[row][column + 2] == token &&
-                    board[row][column + 3] == token) {
+                if (board[row][column].owner() == token &&
+                    board[row][column + 1].owner() == token &&
+                    board[row][column + 2].owner() == token &&
+                    board[row][column + 3].owner() == token) {
                     return true;
                 }
             }
@@ -105,10 +109,10 @@ public class Board {
         //Vertical evaluation.
         for (int row = 0; row < board.length - 3; row++) {
             for (int column = 0; column < board[0].length; column++) {
-                if (board[row][column] == token &&
-                    board[row + 1][column] == token &&
-                    board[row + 2][column] == token &&
-                    board[row + 3][column] == token) {
+                if (board[row][column].owner() == token &&
+                    board[row + 1][column].owner() == token &&
+                    board[row + 2][column].owner() == token &&
+                    board[row + 3][column].owner() == token) {
                     return true;
                 }
             }
@@ -116,10 +120,10 @@ public class Board {
         //Negative diagonal evaluation.
         for (int row = 3; row < board.length; row++) {
             for (int column = 0; column < board[0].length - 3; column++) {
-                if (board[row][column] == token &&
-                    board[row - 1][column + 1] == token &&
-                    board[row - 2][column + 2] == token &&
-                    board[row - 3][column + 3] == token) {
+                if (board[row][column].owner() == token &&
+                    board[row - 1][column + 1].owner() == token &&
+                    board[row - 2][column + 2].owner() == token &&
+                    board[row - 3][column + 3].owner() == token) {
                     return true;
                 }
             }
@@ -127,10 +131,10 @@ public class Board {
         //Positive diagonal evaluation.
         for (int row = 0; row < board.length - 3; row++) {
             for (int column = 0; column < board[0].length - 3; column++) {
-                if (board[row][column] == token &&
-                    board[row + 1][column + 1] == token &&
-                    board[row + 2][column + 2] == token &&
-                    board[row + 3][column + 3] == token) {
+                if (board[row][column].owner() == token &&
+                    board[row + 1][column + 1].owner() == token &&
+                    board[row + 2][column + 2].owner() == token &&
+                    board[row + 3][column + 3].owner() == token) {
                     return true;
                 }
             }
@@ -156,7 +160,7 @@ public class Board {
         StringBuilder sb = new StringBuilder();
         for (int row = 0; row < board.length; row++) {
             for (int column = 0; column < board[0].length; column++) {
-                sb.append(board[row][column]).append(" ");
+                sb.append(board[row][column].owner()).append(" ");
             }
             sb.append(System.getProperty("line.separator"));
         }

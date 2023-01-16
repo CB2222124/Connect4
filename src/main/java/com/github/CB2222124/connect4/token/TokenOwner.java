@@ -1,14 +1,13 @@
-package com.github.CB2222124.connect4;
+package com.github.CB2222124.connect4.token;
 
-public enum Token {
-
-    EMPTY("-"),
+public enum TokenOwner {
+    NONE("-"),
     NOUGHTS("O"),
     CROSSES("X");
 
     private final String string;
 
-    Token(String string) {
+    TokenOwner(String string) {
         this.string = string;
     }
 

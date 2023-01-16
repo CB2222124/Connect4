@@ -1,19 +1,19 @@
 package com.github.CB2222124.connect4.player;
 
 import com.github.CB2222124.connect4.Board;
-import com.github.CB2222124.connect4.Token;
+import com.github.CB2222124.connect4.token.TokenOwner;
 
 public abstract class Player {
 
-    private final Token token;
+    private final TokenOwner token;
     private final String name;
 
-    public Player(Token token, String name) {
+    public Player(TokenOwner token, String name) {
         this.token = token;
         this.name = name;
     }
 
-    public Token getToken() {
+    public TokenOwner getToken() {
         return token;
     }
 
