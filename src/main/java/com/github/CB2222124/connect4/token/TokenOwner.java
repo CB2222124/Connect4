@@ -3,7 +3,8 @@ package com.github.CB2222124.connect4.token;
 public enum TokenOwner {
     NONE("-"),
     NOUGHTS("O"),
-    CROSSES("X");
+    CROSSES("X"),
+    BOMB("*");
 
     private final String string;
 

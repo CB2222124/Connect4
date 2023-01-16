@@ -23,8 +23,9 @@ public class ConsolePlayer extends Player {
             input = scanner.nextLine();
             return new BlitzMove(parseStringAsColumnIndex(input));
         } else if (input.equalsIgnoreCase("T")) {
-            //TODO: Implement;
-            return new BombMove();
+            System.out.print("Enter a column to drop time bomb: ");
+            input = scanner.nextLine();
+            return new BombMove(parseStringAsColumnIndex(input));
         } else {
             return new BasicMove(parseStringAsColumnIndex(input), getToken());
         }

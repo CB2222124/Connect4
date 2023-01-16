@@ -80,7 +80,7 @@ public class Connect4 {
         Token[][] tokens = board.getBoard();
         for (int row = 0; row < tokens.length; row++) {
             for (int column = 0; column < tokens[0].length; column++) {
-                tokens[row][column].update();
+                tokens[row][column].update(board);
             }
         }
     }
