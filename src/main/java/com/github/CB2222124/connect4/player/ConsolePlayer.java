@@ -27,11 +27,15 @@ public class ConsolePlayer extends Player {
         if (input.equalsIgnoreCase("B")) {
             System.out.print("Enter a column to blitz: ");
             input = scanner.nextLine();
-            return new BlitzMove(parseStringAsColumnIndex(input));
+            Move move = new BlitzMove(parseStringAsColumnIndex(input));
+            move.validateMove(board);
+            return move;
         } else if (input.equalsIgnoreCase("T")) {
             System.out.print("Enter a column to drop time bomb: ");
             input = scanner.nextLine();
-            return new BombMove(parseStringAsColumnIndex(input));
+            Move move = new BombMove(parseStringAsColumnIndex(input));
+            move.validateMove(board);
+            return move;
         } else {
             return new BasicMove(parseStringAsColumnIndex(input), getToken());
         }

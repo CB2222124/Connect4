@@ -18,8 +18,13 @@ public class BlitzMove implements Move {
     }
 
     @Override
-    public void makeMove(Board board) throws MoveException {
+    public void validateMove(Board board) throws MoveException {
         if (column < 0 || column > board.getBoard()[0].length) throw new MoveException("Column index out of bounds");
+    }
+
+    @Override
+    public void makeMove(Board board) throws MoveException {
+        validateMove(board);
         for (int row = 0; row < board.getBoard().length; row++) {
             board.getBoard()[row][column] = new BasicToken(TokenOwner.NONE);
         }

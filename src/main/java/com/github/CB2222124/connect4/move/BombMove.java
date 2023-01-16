@@ -20,9 +20,14 @@ public class BombMove implements Move {
     }
 
     @Override
-    public void makeMove(Board board) throws MoveException {
+    public void validateMove(Board board) throws MoveException {
         if (column < 0 || column > board.getBoard()[0].length) throw new MoveException("Column index out of bounds");
         if (board.getBoard()[0][column].owner() != TokenOwner.NONE) throw new MoveException("Column full");
+    }
+
+    @Override
+    public void makeMove(Board board) throws MoveException {
+        validateMove(board);
         for (int row = board.getBoard().length - 1; row >= 0; row--) {
             if (board.getBoard()[row][column].owner() == TokenOwner.NONE) {
                 board.getBoard()[row][column] = new BombToken(row, column, MOVES_UNTIL_EXPLOSION);
