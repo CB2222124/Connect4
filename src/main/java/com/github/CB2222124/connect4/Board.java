@@ -3,7 +3,7 @@ package com.github.CB2222124.connect4;
 @SuppressWarnings("ForLoopReplaceableByForEach")
 public class Board {
 
-    private final char[][] board;
+    private final Token[][] board;
 
     /**
      * Instantiates a Connect 4 board.
@@ -15,19 +15,17 @@ public class Board {
      */
     public Board(int rows, int columns) {
         if (rows < 1 || columns < 1) throw new IllegalArgumentException("There must be at least one row and column");
-        board = new char[rows][columns];
+        board = new Token[rows][columns];
         instantiateBoard();
     }
 
     /**
-     * Populates this board with a '-' character to represent empty.
-     * Programmers Note: Consider using Character class-type rather than primitive char for nullability
-     * or add some constraint on a player using this special character as their token.
+     * Populates this board with empty tokens.
      */
     private void instantiateBoard() {
         for (int row = 0; row < board.length; row++) {
             for (int column = 0; column < board[0].length; column++) {
-                board[row][column] = '-';
+                board[row][column] = Token.EMPTY;
             }
         }
     }
@@ -39,7 +37,7 @@ public class Board {
      */
     public boolean isFull() {
         for (int column = 0; column < board[0].length; column++) {
-            if (board[0][column] == '-') return false;
+            if (board[0][column] == Token.EMPTY) return false;
         }
         return true;
     }
@@ -50,11 +48,11 @@ public class Board {
      * @param column The column to insert into.
      * @param token  The token to insert.
      */
-    public void makeMove(int column, char token) throws IllegalMoveException {
+    public void makeMove(int column, Token token) throws IllegalMoveException {
         validateMove(column);
         //Occupy the first available row from the end of the specified column.
         for (int row = board.length - 1; row >= 0; row--) {
-            if (board[row][column] == '-') {
+            if (board[row][column] == Token.EMPTY) {
                 board[row][column] = token;
                 break;
             }
@@ -69,18 +67,19 @@ public class Board {
     public void makeBlitz(int column) throws IllegalMoveException {
         validateMove(column);
         for (int row = 0; row < board.length; row++) {
-            board[row][column] = '-';
+            board[row][column] = Token.EMPTY;
         }
     }
 
     /**
      * Validates a standard column insert move.
+     *
      * @param column The column to validate
      * @throws IllegalMoveException Where column index is out of bounds or full.
      */
     public void validateMove(int column) throws IllegalMoveException {
         if (column < 0 || column > board[0].length) throw new IllegalMoveException("Column index out of bounds");
-        if (board[0][column] != '-') throw new IllegalMoveException("Column full");
+        if (board[0][column] != Token.EMPTY) throw new IllegalMoveException("Column full");
     }
 
     /**
@@ -91,7 +90,7 @@ public class Board {
      * @param token The token to evaluate for.
      * @return True if there is a winning position for the given token, false otherwise.
      */
-    public boolean isWinningPosition(char token) {
+    public boolean isWinningPosition(Token token) {
         //Horizontal evaluation.
         for (int row = 0; row < board.length; row++) {
             for (int column = 0; column < board[0].length - 3; column++) {
@@ -142,7 +141,7 @@ public class Board {
     /**
      * @return 2D array representation of board.
      */
-    public char[][] getBoard() {
+    public Token[][] getBoard() {
         return board;
     }
 
