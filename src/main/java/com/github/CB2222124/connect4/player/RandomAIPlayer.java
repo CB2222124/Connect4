@@ -6,15 +6,21 @@ import java.util.ArrayList;
 import java.util.Random;
 
 
-public class AIPlayer extends Player {
+public class RandomAIPlayer extends Player {
 
     private final Random random;
 
-    public AIPlayer(char token, String name) {
+    public RandomAIPlayer(char token, String name) {
         super(token, name);
         random = new Random();
     }
 
+    /**
+     * Selects a completely random move.
+     *
+     * @param board The board to evaluate.
+     * @return random valid column index.
+     */
     @Override
     public int getMove(Board board) {
         ArrayList<Integer> validColumns = new ArrayList<>();

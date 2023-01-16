@@ -10,6 +10,15 @@ public class Connect4 {
     private final Player player2;
     private final Connect4View view;
 
+    /**
+     * Instantiates a game of connect4.
+     *
+     * @param rows    The number of rows.
+     * @param columns The number of columns.
+     * @param player1 Player 1.
+     * @param player2 Player 2.
+     * @param view    The view used to display game events.
+     */
     public Connect4(int rows, int columns, Player player1, Player player2, Connect4View view) {
         this.board = new Board(rows, columns);
         this.player1 = player1;
@@ -18,6 +27,9 @@ public class Connect4 {
         play();
     }
 
+    /**
+     * Handles a turn for each player until a game completion event is reached (Winner or full board).
+     */
     private void play() {
         while (!board.isFull()) {
             if (handleTurn(player1)) {
@@ -31,12 +43,24 @@ public class Connect4 {
         view.showDraw();
     }
 
+    /**
+     * Handles a turn for the specified player.
+     *
+     * @param player The player.
+     * @return True if the player wins on this turn, false otherwise.
+     */
     private boolean handleTurn(Player player) {
         view.showBoard(board);
         handleMove(player);
         return board.isWinningPosition(player.getToken());
     }
 
+    /**
+     * Handles a move for the specified player. The player is recursively asked to provide a valid move,
+     * the board is then updated.
+     *
+     * @param player The player.
+     */
     private void handleMove(Player player) {
         try {
             board.makeMove(player.getMove(board), player.getToken());
