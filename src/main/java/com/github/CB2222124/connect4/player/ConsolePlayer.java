@@ -8,6 +8,12 @@ import java.util.Scanner;
 
 public class ConsolePlayer extends Player {
 
+    /**
+     * Human player that inputs moves through the Standard input stream.
+     *
+     * @param token The token ownership associated with this player.
+     * @param name  The display name for this player.
+     */
     public ConsolePlayer(TokenOwner token, String name) {
         super(token, name);
     }

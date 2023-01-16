@@ -3,6 +3,9 @@ package com.github.CB2222124.connect4.view;
 import com.github.CB2222124.connect4.Board;
 import com.github.CB2222124.connect4.player.Player;
 
+/**
+ * Standard output stream view for a connect4 game.
+ */
 public class ConsoleConnect4View implements Connect4View {
 
     @Override

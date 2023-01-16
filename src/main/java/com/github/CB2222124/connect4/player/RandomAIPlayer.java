@@ -13,6 +13,12 @@ public class RandomAIPlayer extends Player {
 
     private final Random random;
 
+    /**
+     * Computer controlled player that makes a basic move into a random valid column each turn.
+     *
+     * @param token The token ownership associated with this player.
+     * @param name  The display name for this player.
+     */
     public RandomAIPlayer(TokenOwner token, String name) {
         super(token, name);
         random = new Random();
