@@ -140,6 +140,13 @@ public class Board {
     }
 
     /**
+     * @return 2D array representation of board.
+     */
+    public char[][] getBoard() {
+        return board;
+    }
+
+    /**
      * Returns a string representation of this board. Each row occupies
      * a new line and each column is separated by whitespace.
      *
