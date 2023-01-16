@@ -47,46 +47,6 @@ public class Board {
     }
 
     /**
-     * Inserts a token into the specified column.
-     *
-     * @param column The column to insert into.
-     * @param token  The token to insert.
-     */
-    public void makeMove(int column, TokenOwner token) throws IllegalMoveException {
-        validateMove(column);
-        //Occupy the first available row from the end of the specified column.
-        for (int row = board.length - 1; row >= 0; row--) {
-            if (board[row][column].owner() == TokenOwner.NONE) {
-                board[row][column] = new BasicToken(token);
-                break;
-            }
-        }
-    }
-
-    /**
-     * Replaces all tokens within the specified column with the empty token.
-     *
-     * @param column The column to blitz.
-     */
-    public void makeBlitz(int column) throws IllegalMoveException {
-        validateMove(column);
-        for (int row = 0; row < board.length; row++) {
-            board[row][column] = new BasicToken(TokenOwner.NONE);
-        }
-    }
-
-    /**
-     * Validates a standard column insert move.
-     *
-     * @param column The column to validate
-     * @throws IllegalMoveException Where column index is out of bounds or full.
-     */
-    public void validateMove(int column) throws IllegalMoveException {
-        if (column < 0 || column > board[0].length) throw new IllegalMoveException("Column index out of bounds");
-        if (board[0][column].owner() != TokenOwner.NONE) throw new IllegalMoveException("Column full");
-    }
-
-    /**
      * Evaluates this board for a winning position for a given token.
      * A winning position is defined as a continuous horizontal, vertical, or diagonal
      * line of four with the given token.

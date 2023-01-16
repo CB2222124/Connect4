@@ -1,6 +1,8 @@
 package com.github.CB2222124.connect4.player;
 
 import com.github.CB2222124.connect4.Board;
+import com.github.CB2222124.connect4.move.BasicMove;
+import com.github.CB2222124.connect4.move.Move;
 import com.github.CB2222124.connect4.token.TokenOwner;
 
 import java.util.ArrayList;
@@ -23,10 +25,11 @@ public class RandomAIPlayer extends Player {
      * @return random valid column index.
      */
     @Override
-    public int getMove(Board board) {
+    public Move getMove(Board board) {
         ArrayList<Integer> validColumns = new ArrayList<>();
         for (int column = 0; column < board.getBoard()[0].length; column++)
             if (board.getBoard()[0][column].owner() == TokenOwner.NONE) validColumns.add(column);
-        return validColumns.get(random.nextInt(validColumns.size()));
+        int column = validColumns.get(random.nextInt(validColumns.size()));
+        return new BasicMove(column, getToken());
     }
 }

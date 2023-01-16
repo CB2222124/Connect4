@@ -1,6 +1,9 @@
 package com.github.CB2222124.connect4;
 
+import com.github.CB2222124.connect4.move.MoveException;
+import com.github.CB2222124.connect4.move.Move;
 import com.github.CB2222124.connect4.player.Player;
+import com.github.CB2222124.connect4.token.Token;
 import com.github.CB2222124.connect4.view.Connect4View;
 
 public class Connect4 {
@@ -31,7 +34,7 @@ public class Connect4 {
      * Handles a turn for each player until a game completion event is reached (Winner or full board).
      */
     private void play() {
-        while (!board.isFull()) {
+        while (!board.isFull()) { //TODO: In our modified version of connect4, we should check if the current player can free spaces in the board with a move.
             if (handleTurn(player1)) {
                 view.showWinner(player1);
                 return;
@@ -50,6 +53,7 @@ public class Connect4 {
      * @return True if the player wins on this turn, false otherwise.
      */
     private boolean handleTurn(Player player) {
+        updateTokens();
         view.showBoard(board);
         handleMove(player);
         return board.isWinningPosition(player.getToken());
@@ -63,10 +67,21 @@ public class Connect4 {
      */
     private void handleMove(Player player) {
         try {
-            board.makeMove(player.getMove(board), player.getToken());
-        } catch (IllegalMoveException ex) {
+            Move move = player.getMove(board);
+            move.makeMove(board);
+        } catch (MoveException ex) {
             view.showInvalidMove();
             handleMove(player);
+        }
+    }
+
+    @SuppressWarnings("ForLoopReplaceableByForEach")
+    private void updateTokens() {
+        Token[][] tokens = board.getBoard();
+        for (int row = 0; row < tokens.length; row++) {
+            for (int column = 0; column < tokens[0].length; column++) {
+                tokens[row][column].update();
+            }
         }
     }
 }

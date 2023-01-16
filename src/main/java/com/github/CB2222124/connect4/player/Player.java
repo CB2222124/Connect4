@@ -1,6 +1,8 @@
 package com.github.CB2222124.connect4.player;
 
 import com.github.CB2222124.connect4.Board;
+import com.github.CB2222124.connect4.move.Move;
+import com.github.CB2222124.connect4.move.MoveException;
 import com.github.CB2222124.connect4.token.TokenOwner;
 
 public abstract class Player {
@@ -21,5 +23,5 @@ public abstract class Player {
         return name;
     }
 
-    public abstract int getMove(Board board);
+    public abstract Move getMove(Board board) throws MoveException;
 }
